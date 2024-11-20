@@ -5,7 +5,17 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [msg, setMsg] = useState('')
   const [apiPayload, setPayload] = useState('No Response Yet')
+
+  async function handleChange(message) {
+    setMsg(message)
+  }
+
+  async function postPayload() {
+    const response = await axios.post(`http://127.0.0.1:9999/`, {msg: msg})
+    console.log(response)
+  }
 
   useEffect(() => {
     async function getPayload() {
@@ -23,6 +33,11 @@ function App() {
         <p>
           {apiPayload}
         </p>
+
+        <input onChange={(e) => handleChange(e?.target?.value)}>
+        </input>
+        <button onClick={postPayload}>post</button>
+
         <a
           className="App-link"
           href="https://reactjs.org"

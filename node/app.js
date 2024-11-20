@@ -26,6 +26,11 @@ app.get('/', async (req, res) => {
     return res.send(message);
 });
 
+app.post('/', async (req, res) => {
+    await col.insertOne(req.body)
+    return res.send({'msg': 'posted'});
+});
+
 // Start app
 app.listen(PORT, () => {
     // async function redisConnect() {
